@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Books</h1>
+  <div class="row">
+    <div class="col-6">
+      <div class="mb-3">
+        <label for="search" class="form-label">Search</label>
+        <input [ngModel]="input" (ngModelChange)="modelChangeFn($event)">
+        <label class="form-label" style="color:red">{{invalidSearchFeedback}}</label>
+      </div>
+    </div>
+  </div>
+  <div id="holdList" infinite-scroll="onScroll()">
+    <table class="table" *ngIf="books && books.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Auther</th>
+          <th scope="col">Date</th>
+          <th scope="col">Image</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <th>{{ book.bookTitle }}</th>
+          <th>{{ book.bookDescription }}</th>
+          <th>{{ book.author }}</th>
+          <th>{{ book.publishDate | date }}</th>
+          <th><img [src]="book.coverSrc" height="100px" width="100px"/></th>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="!books || books.length == 0">No Books Found!</p>
+  </div>
+</div>
